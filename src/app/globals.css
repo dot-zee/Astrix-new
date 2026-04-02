@@ -1,61 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic+Guides&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic+Guides&family=Tangerine:wght@400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic+Guides&family=Tangerine:wght@400;700&display=swap");
-
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-family-sans:
-    var(--font-comfortaa), "comfortaa", ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: var(--font-primary), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.quicksand {
-  font-family: "Quicksand", sans-serif;
-  /* font-weight: 300; */
+/* 
+ * Typography System 
+ * Used for authoritative, structural consistency 
+ */
+@layer base {
+  :root {
+    --tracking-tightest: -0.04em;
+    --tracking-tight: -0.02em;
+    --tracking-normal: -0.01em;
+    --tracking-wide: 0.01em;
+    
+    --leading-tight: 1.1;
+    --leading-snug: 1.3;
+    --leading-base: 1.5;
+    --leading-relaxed: 1.7;
+  }
 }
 
-.ubuntu {
-  font-family: "Ubuntu", sans-serif;
-  /* font-weight: 300; */
-  font-style: normal;
+.default-typography {
+  font-family: var(--font-primary), sans-serif;
+  letter-spacing: var(--tracking-normal);
+  line-height: var(--leading-base);
 }
 
-.tangerine {
-  font-family: "Tangerine", cursive;
-  font-weight: 400;
-  font-style: normal;
+h1, .text-h1 {
+  letter-spacing: var(--tracking-tightest);
+  line-height: var(--leading-tight);
 }
 
-.ubuntu2 {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+h2, h3, .text-h2, .text-h3 {
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
 }
 
-.figtree {
-  font-family: "Figtree", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-}
-
-.comfortaa {
-  font-family: "Comfortaa", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.montserrat {
-  font-family: "montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
+h4, h5, h6 {
+  letter-spacing: var(--tracking-normal);
+  line-height: var(--leading-snug);
 }
 
 .gradienttxt {
@@ -189,7 +178,6 @@
   body {
     background: var(--background);
     color: var(--foreground);
-    font-family: "Comfortaa", sans-serif;
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
@@ -208,9 +196,9 @@
   }
 
   .montserrat {
-    font-family: "Comfortaa", sans-serif;
+    font-family: inherit;
     font-optical-sizing: auto;
-    font-weight: 400;
+    font-weight: inherit;
   }
 
   .section-with-light {
@@ -437,5 +425,39 @@ hr,
 }
 
 .Glock {
-  font-family: "Glock Grotesk", sans-serif;
+  font-family: var(--font-primary), sans-serif;
+}
+
+/* 
+ * Cinematic Hero Animations
+ * Tailored for an "operating system coming online" feel 
+ */
+@keyframes hero-logo-reveal {
+  0% { opacity: 0; transform: translateY(60px) scale(0.98); filter: blur(12px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes hero-content-reveal {
+  0% { opacity: 0; transform: translateX(-30px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+
+@keyframes hero-bg-shift {
+  0% { opacity: 0; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-hero-logo {
+  animation: hero-logo-reveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-hero-content {
+  animation: hero-content-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0; /* Stay hidden until animation starts via delay */
+}
+
+.animate-hero-bg {
+  animation: hero-bg-shift 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
